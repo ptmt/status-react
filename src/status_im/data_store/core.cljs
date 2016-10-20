@@ -1,5 +1,6 @@
 (ns status-im.data-store.core
   (:require [taoensso.timbre :as log]
+            [status-im.data-store.test-data.contacts :refer [add-test-contacts]]
             [status-im.data-store.realm.core :as data-source]))
 
 
@@ -7,4 +8,5 @@
   (data-source/reset-account))
 
 (defn change-account [address new-account? handler]
-  (data-source/change-account address new-account? handler))
+  (data-source/change-account address new-account? handler)
+  (add-test-contacts))

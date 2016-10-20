@@ -66,10 +66,6 @@
   (fn [db [_]]
     (assoc db :prev-tab-view-id nil)))
 
-(register-handler :remove-contacts-click-handler
-                  (fn [db]
-                    (dissoc db :contacts-click-handler)))
-
 (defn show-profile
   [db [_ identity]]
   (-> db

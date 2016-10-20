@@ -5,6 +5,7 @@
                                                 animated-view
                                                 text
                                                 icon
+                                                modal
                                                 touchable-highlight
                                                 list-view
                                                 list-item]]
@@ -175,6 +176,7 @@
         show-actions? (subscribe [:chat-ui-props :show-actions?])
         show-bottom-info? (subscribe [:chat-ui-props :show-bottom-info?])
         command? (subscribe [:command?])
+        chat-modal (subscribe [:get :chat-modal])
         layout-height (subscribe [:get :layout-height])]
     (r/create-class
       {:component-did-mount #(dispatch [:check-autorun])
@@ -198,4 +200,10 @@
             [actions-view])
           (when @show-bottom-info?
             [bottom-info-view])
+          (when @chat-modal
+            [view st/chat-modal
+             [modal {:animation-type :slide
+                     :transparent    false
+                     :onRequestClose #(dispatch [:set :chat-modal nil])}
+              [@chat-modal]]])
           [offline-view {:top (get-in platform-specific [:component-styles :status-bar :default :height])}]])})))
